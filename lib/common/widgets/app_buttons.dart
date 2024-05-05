@@ -15,7 +15,7 @@ class AppElevatedButton extends StatelessWidget {
       required this.text,
       this.onTap,
       this.width = 325,
-      this.height = 65,
+      this.height = 60,
       this.fontSize = 25,
       this.color = AppColors.primaryElement,
       this.radius = 35});

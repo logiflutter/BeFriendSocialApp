@@ -12,6 +12,8 @@ class AppTextField extends StatelessWidget {
   final Color? color;
   final Color? bgColor;
   final bool? obscureText;
+  final String? initialText;
+  final String? Function(String? value)? validator;
   const AppTextField(this.text,
       {super.key,
       this.onChanged,
@@ -21,51 +23,49 @@ class AppTextField extends StatelessWidget {
       this.height = 50,
       this.width = double.infinity,
       this.radius = 16,
-      this.obscureText = false});
+      this.obscureText = false,
+      this.initialText = '',
+      this.validator});
   @override
   Widget build(context) {
     return Container(
       alignment: Alignment.centerLeft,
       width: width!.w,
-      height: height!.h,
-      padding: EdgeInsets.symmetric(horizontal: 13.w),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius!),
-        color: bgColor,
-      ),
-      child: TextField(
+      child: TextFormField(
         onChanged: onChanged,
         controller: controller,
         obscureText: obscureText!,
         autocorrect: false,
+        initialValue: initialText,
+        validator: validator,
         decoration: InputDecoration(
-          label: Text(
-            text,
-            style: TextStyle(
-                fontSize: 10.sp, color: color, fontWeight: FontWeight.bold),
-          ),
-          border: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
-          ),
-          disabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
-          ),
+          label: Text(text, style: TextStyle(fontSize: 10.sp, color: color, fontWeight: FontWeight.bold)),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+          filled: true,
+          fillColor: bgColor,
+          // border: _outlineTransparent(radius: radius!),
+          enabledBorder: _outlineTransparent(radius: radius!),
+          focusedBorder: _outlineTransparent(radius: radius!),
+          // disabledBorder: _outlineTransparent(radius: radius!),
+          errorBorder: _outlineError(radius: radius!),
+          focusedErrorBorder: _outlineError(radius: radius!),
         ),
       ),
     );
   }
+  OutlineInputBorder _outlineTransparent({required double radius}) =>
+      OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Colors.transparent,
+        ),
+        borderRadius: BorderRadius.circular(radius),
+      );
+
+  OutlineInputBorder _outlineError({required double radius}) =>
+      OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Colors.red,
+        ),
+        borderRadius: BorderRadius.circular(radius),
+      );
 }

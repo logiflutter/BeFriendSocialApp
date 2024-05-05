@@ -3,7 +3,7 @@ import 'package:be_friend/common/utils/image_res.dart';
 import 'package:be_friend/common/widgets/app_buttons.dart';
 import 'package:be_friend/features/onboarding/provider/onboarding_provider.dart';
 import 'package:be_friend/features/onboarding/view/widgets/onboarding_widgets.dart';
-import 'package:be_friend/features/sign_in/view/sign_in.dart';
+import 'package:be_friend/features/authenticate/view/auth.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,8 +26,8 @@ class _OnboardingScreen extends ConsumerState<OnboardingScreen> {
   }
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
+    super.dispose();
   }
   
   @override
@@ -81,7 +81,7 @@ class _OnboardingScreen extends ConsumerState<OnboardingScreen> {
                       controller.animateToPage(index + 1, duration: const Duration(milliseconds: 300), curve: Curves.linear);
                       } else {
                         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                          return const SignInScreen();
+                          return const AuthScreen();
                         }));
                       }
                     },
