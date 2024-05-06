@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -11,6 +12,25 @@ class AppAlert {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       timeInSecForIosWeb: 2,
+    );
+  }
+
+  static void showSnackbarCupertino(BuildContext context, String title,
+      String subTitle, String textButton, void Function() onPressed) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(subTitle),
+          actions: [
+            CupertinoDialogAction(
+              onPressed: onPressed,
+              child: Text(textButton),
+            ),
+          ],
+        );
+      },
     );
   }
 }

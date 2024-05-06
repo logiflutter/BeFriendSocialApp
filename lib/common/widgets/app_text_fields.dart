@@ -7,8 +7,8 @@ class AppTextField extends StatelessWidget {
   final Function(String value)? onChanged;
   final TextEditingController? controller;
   final double? width;
-  final double? height;
   final double? radius;
+  final EdgeInsets? contentPadding;
   final Color? color;
   final Color? bgColor;
   final bool? obscureText;
@@ -20,12 +20,12 @@ class AppTextField extends StatelessWidget {
       this.controller,
       this.color = AppColors.primaryThreeElementText,
       this.bgColor = const Color.fromARGB(255, 249, 244, 244),
-      this.height = 50,
       this.width = double.infinity,
       this.radius = 16,
       this.obscureText = false,
       this.initialText = '',
-      this.validator});
+      this.validator,
+      this.contentPadding = const  EdgeInsets.symmetric(horizontal: 25, vertical: 18)});
   @override
   Widget build(context) {
     return Container(
@@ -40,7 +40,7 @@ class AppTextField extends StatelessWidget {
         validator: validator,
         decoration: InputDecoration(
           label: Text(text, style: TextStyle(fontSize: 10.sp, color: color, fontWeight: FontWeight.bold)),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+          contentPadding: contentPadding,
           filled: true,
           fillColor: bgColor,
           // border: _outlineTransparent(radius: radius!),
